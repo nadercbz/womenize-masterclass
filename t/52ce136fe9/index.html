@@ -311,7 +311,7 @@ h1 { font-family: var(--display); font-weight: 650; font-size: clamp(34px, 5.4vw
 (function () {
   /* Personal gallery. Page data and every photo are AES-GCM encrypted.
      PBKDF2(password) -> HKDF gives the shared key (group and event photos).
-     The personal key also needs the secret after "#k=" in the link, which never reaches the server. */
+     The personal key also needs the secret after "k=" in the personal link. */
   const $ = id => document.getElementById(id);
   const V = JSON.parse($("vault").textContent);
   const te = new TextEncoder();
@@ -319,7 +319,8 @@ h1 { font-family: var(--display); font-weight: 650; font-size: clamp(34px, 5.4vw
   const b64e = u => { let s = ""; for (let i = 0; i < u.length; i++) s += String.fromCharCode(u[i]); return btoa(s); };
   const SK = "mc-guest-key";
   const LINK_MSG = "Dieser Link ist unvollständig. Bitte öffne den Link genau so, wie du ihn bekommen hast.";
-  const hit = /(?:^|[#&])k=([A-Za-z0-9_-]{22})(?![A-Za-z0-9_-])/.exec(location.hash);
+  /* key from "?k=" (current links) or "#k=" (older links) */
+  const hit = /(?:^|[?#&])k=([A-Za-z0-9_-]{22})(?![A-Za-z0-9_-])/.exec(location.search + location.hash);
   const secret = hit ? b64d(hit[1]) : null;
   let K = null, started = false;
 

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Seite nicht gefunden</title>
+<script>
+/* Some apps (e.g. Numbers) turn "#" or "?" in a link into %23 / %3F, which makes GitHub answer 404.
+   Repair such personal gallery links and send the visitor on to the right page. */
+(function () {
+  var raw = location.pathname + location.search + location.hash, s = raw;
+  try { s = decodeURIComponent(raw); } catch (e) {}
+  var m = /^(.*?)\/t\/([0-9a-f]{10})\/?[#?&]*k=([A-Za-z0-9_-]{22})(?![A-Za-z0-9_-])/.exec(s);
+  if (m) location.replace(m[1] + "/t/" + m[2] + "/?k=" + m[3]);
+})();
+</script>
+<style>
+:root { color-scheme: dark; }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #121211; color: #ece8e2;
+  font: 16px/1.5 "Helvetica Neue", "Segoe UI", system-ui, sans-serif; padding: 24px; box-sizing: border-box; }
+main { max-width: 420px; }
+h1 { font-size: 28px; line-height: 1.1; margin: 0 0 12px; }
+p { color: #99938b; margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Seite nicht gefunden</h1>
+  <p>Bitte öffne den Link genau so, wie du ihn bekommen hast.</p>
+</main>
+</body>
+</html>
